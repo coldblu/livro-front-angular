@@ -7,18 +7,14 @@
     <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
     <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
   </button>
-  Responsive side navigation
+  <button mat-icon-button>
+    <mat-icon> home </mat-icon>
+  </button>
+  Livros
 </mat-toolbar>
 
 <mat-sidenav-container>
   <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
-    <img
-      class="avatar mat-elevation-z8"
-      src="https://source.unsplash.com/c_GmwfHBDzk/200x200"
-    />
-
-    <h4 class="name">John Smith</h4>
-    <p class="designation">Software Engineer</p>
 
     <mat-divider></mat-divider>
 
@@ -26,9 +22,9 @@
       <mat-icon>home</mat-icon>
       <span>Home</span>
     </button>
-    <button mat-button class="menu-button" routerLink="/profile">
+    <button mat-button class="menu-button" routerLink="/home/livros">
       <mat-icon>person</mat-icon>
-      <span>Profile</span>
+      <span>Livros</span>
     </button>
     <button mat-button class="menu-button" routerLink="/about">
       <mat-icon>info</mat-icon>
