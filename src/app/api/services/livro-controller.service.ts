@@ -51,8 +51,8 @@ export class LivroControllerService extends BaseService {
     }
 
     return this.http.request(rb.build({
-      responseType: 'blob',
-      accept: '*/*',
+      responseType: 'json',
+      accept: 'application/json',
       context: context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
@@ -108,8 +108,8 @@ export class LivroControllerService extends BaseService {
     }
 
     return this.http.request(rb.build({
-      responseType: 'blob',
-      accept: '*/*',
+      responseType: 'json',
+      accept: 'application/json',
       context: context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
@@ -165,8 +165,8 @@ export class LivroControllerService extends BaseService {
     }
 
     return this.http.request(rb.build({
-      responseType: 'blob',
-      accept: '*/*',
+      responseType: 'json',
+      accept: 'application/json',
       context: context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
@@ -213,20 +213,20 @@ export class LivroControllerService extends BaseService {
   },
   context?: HttpContext
 
-): Observable<StrictHttpResponse<Array<LivroListaDto>>> {
+): Observable<StrictHttpResponse<LivroListaDto>> {
 
     const rb = new RequestBuilder(this.rootUrl, LivroControllerService.ListAllPath, 'get');
     if (params) {
     }
 
     return this.http.request(rb.build({
-      responseType: 'blob',
-      accept: '*/*',
+      responseType: 'json',
+      accept: 'application/json',
       context: context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Array<LivroListaDto>>;
+        return r as StrictHttpResponse<LivroListaDto>;
       })
     );
   }
@@ -243,10 +243,10 @@ export class LivroControllerService extends BaseService {
   },
   context?: HttpContext
 
-): Observable<Array<LivroListaDto>> {
+): Observable<LivroListaDto> {
 
     return this.listAll$Response(params,context).pipe(
-      map((r: StrictHttpResponse<Array<LivroListaDto>>) => r.body as Array<LivroListaDto>)
+      map((r: StrictHttpResponse<LivroListaDto>) => r.body as LivroListaDto)
     );
   }
 
@@ -256,7 +256,7 @@ export class LivroControllerService extends BaseService {
   static readonly BuscarPath = '/api/v1/livro/buscar';
 
   /**
-   * Listagem Geral dos livros
+   * Buscar um livro pelo título
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
    * To access only the response body, use `buscar()` instead.
@@ -276,8 +276,8 @@ export class LivroControllerService extends BaseService {
     }
 
     return this.http.request(rb.build({
-      responseType: 'blob',
-      accept: '*/*',
+      responseType: 'json',
+      accept: 'application/json',
       context: context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
@@ -288,7 +288,7 @@ export class LivroControllerService extends BaseService {
   }
 
   /**
-   * Listagem Geral dos livros
+   * Buscar um livro pelo título
    *
    * This method provides access only to the response body.
    * To access the full response (for headers, for example), `buscar$Response()` instead.

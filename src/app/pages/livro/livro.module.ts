@@ -8,6 +8,7 @@ import {livroRoutes} from "./livro-routing.module";
 import {MatCardModule} from "@angular/material/card";
 import {MatButton, MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import {MatIconModule} from "@angular/material/icon";
     RouterModule.forChild(livroRoutes),
     MatCardModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatTableModule
   ]
 })
 export class LivroModule { }
