@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
 import {LivroDto} from "../../../api/models/livro-dto";
 import {LivroControllerService} from "../../../api/services/livro-controller.service";
-import {LivroListaDto} from "../../../api/models/livro-lista-dto";
 
 @Component({
   selector: 'app-list-livro',
@@ -10,7 +9,7 @@ import {LivroListaDto} from "../../../api/models/livro-lista-dto";
   styleUrls: ['./list-livro.component.scss'],
 })
 export class ListLivroComponent implements OnInit {
-  colunasMostrar = ['id', 'titulo', 'autor', 'ano', 'editora'];
+  colunasMostrar = ['titulo', 'autor', 'ano', 'editora'];
   livroListaDataSource: MatTableDataSource<LivroDto> = new MatTableDataSource<LivroDto>();
 
   constructor(
@@ -25,6 +24,7 @@ export class ListLivroComponent implements OnInit {
   private buscarDados() {
     this.livroService.listAll().subscribe(data => {
       this.livroListaDataSource.data = data;
+      console.log(JSON.stringify(data));
     })
   }
 }

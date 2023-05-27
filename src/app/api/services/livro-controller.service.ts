@@ -12,7 +12,6 @@ import { map, filter } from 'rxjs/operators';
 import { Livro } from '../models/livro';
 import { LivroAlteravelDto } from '../models/livro-alteravel-dto';
 import { LivroDto } from '../models/livro-dto';
-import { LivroListaDto } from '../models/livro-lista-dto';
 
 @Injectable({
   providedIn: 'root',
@@ -213,7 +212,7 @@ export class LivroControllerService extends BaseService {
   },
   context?: HttpContext
 
-): Observable<StrictHttpResponse<LivroListaDto>> {
+): Observable<StrictHttpResponse<any>> {
 
     const rb = new RequestBuilder(this.rootUrl, LivroControllerService.ListAllPath, 'get');
     if (params) {
@@ -226,7 +225,7 @@ export class LivroControllerService extends BaseService {
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<LivroListaDto>;
+        return r as StrictHttpResponse<any>;
       })
     );
   }
@@ -243,10 +242,10 @@ export class LivroControllerService extends BaseService {
   },
   context?: HttpContext
 
-): Observable<LivroListaDto> {
+): Observable<any> {
 
     return this.listAll$Response(params,context).pipe(
-      map((r: StrictHttpResponse<LivroListaDto>) => r.body as LivroListaDto)
+      map((r: StrictHttpResponse<any>) => r.body as any)
     );
   }
 
