@@ -1,0 +1,67 @@
+
+<form
+  [formGroup]="formGroup"
+  (ngSubmit)="onSubmit()"
+  class="form"
+>
+  <div class="formLivro">
+<!--    <h1>Formulário para {{acao}}</h1>-->
+    <mat-form-field>
+      <mat-label>Titulo:</mat-label>
+      <input matInput formControlName="titulo">
+<!--      <mat-error *ngIf="handleError('titulo', 'required')">-->
+<!--        O titulo do livro é obrigatório-->
+<!--      </mat-error>-->
+<!--      <mat-error *ngIf="handleError('titulo', 'minlength')">-->
+<!--        Mínimo 5 caracteres-->
+<!--      </mat-error>-->
+<!--      <mat-error *ngIf="handleError('titulo', 'maxlength')">-->
+<!--        Máximo 100 caracteres-->
+<!--      </mat-error>-->
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Autor:</mat-label>
+      <input matInput formControlName="autor">
+<!--      <mat-error *ngIf="handleError('nome', 'required')">-->
+<!--        O nome do autor é obrigatório-->
+<!--      </mat-error>-->
+<!--      <mat-error *ngIf="handleError('nome', 'minlength')">-->
+<!--        Mínimo 5 caracteres-->
+<!--      </mat-error>-->
+<!--      <mat-error *ngIf="handleError('nome', 'maxlength')">-->
+<!--        Máximo 100 caracteres-->
+<!--      </mat-error>-->
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Editora:</mat-label>
+      <input matInput formControlName="editora">
+<!--      <mat-error *ngIf="handleError('editora', 'required')">-->
+<!--        O nome da editora é obrigatório-->
+<!--      </mat-error>-->
+<!--      <mat-error *ngIf="handleError('editora', 'minlength')">-->
+<!--        Mínimo 5 caracteres-->
+<!--      </mat-error>-->
+<!--      <mat-error *ngIf="handleError('editora', 'maxlength')">-->
+<!--        Máximo 100 caracteres-->
+<!--      </mat-error>-->
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Ano Publicação:</mat-label>
+      <input matInput formControlName="anoPubli">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Gênero:</mat-label>
+      <input matInput formControlName="genero">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Numero de Páginas:</mat-label>
+      <input matInput formControlName="paginas">
+    </mat-form-field>
+
+
+    <button mat-raised-button color="primary" type="submit">Cadastrar Livro</button>
+  </div>
+</form>
+

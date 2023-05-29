@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {HomeLivroComponent} from "./home-livro/home-livro.component";
 import {ListLivroComponent} from "./list-livro/list-livro.component";
+import {FormLivroComponent} from "./form-livro/form-livro.component";
 
 export const livroRoutes: Routes = [
   {
@@ -11,6 +12,14 @@ export const livroRoutes: Routes = [
       {
         path: "",
         component: ListLivroComponent
+      },
+      {
+        path: "novo",
+        component: FormLivroComponent
+      },
+      {
+        path: ":id",
+        component: FormLivroComponent
       }
     ]
   }

@@ -141,7 +141,7 @@ export class LivroControllerService extends BaseService {
   /**
    * Path part for operation excluir
    */
-  static readonly ExcluirPath = '/api/v1/livro/deletar';
+  static readonly ExcluirPath = '/api/v1/livro/deletar/{id}';
 
   /**
    * Método utilizado para deletar livro do banco de dados
@@ -152,6 +152,7 @@ export class LivroControllerService extends BaseService {
    * This method sends `application/json` and handles request body of type `application/json`.
    */
   excluir$Response(params: {
+    id: number;
     body: LivroDto
   },
   context?: HttpContext
@@ -160,6 +161,7 @@ export class LivroControllerService extends BaseService {
 
     const rb = new RequestBuilder(this.rootUrl, LivroControllerService.ExcluirPath, 'post');
     if (params) {
+      rb.path('id', params.id, {});
       rb.body(params.body, 'application/json');
     }
 
@@ -184,6 +186,7 @@ export class LivroControllerService extends BaseService {
    * This method sends `application/json` and handles request body of type `application/json`.
    */
   excluir(params: {
+    id: number;
     body: LivroDto
   },
   context?: HttpContext
@@ -252,7 +255,7 @@ export class LivroControllerService extends BaseService {
   /**
    * Path part for operation buscar
    */
-  static readonly BuscarPath = '/api/v1/livro/buscar';
+  static readonly BuscarPath = '/api/v1/livro/buscar/{id}';
 
   /**
    * Buscar um livro pelo título
@@ -263,7 +266,7 @@ export class LivroControllerService extends BaseService {
    * This method doesn't expect any request body.
    */
   buscar$Response(params: {
-    l: LivroDto;
+    id: number;
   },
   context?: HttpContext
 
@@ -271,7 +274,7 @@ export class LivroControllerService extends BaseService {
 
     const rb = new RequestBuilder(this.rootUrl, LivroControllerService.BuscarPath, 'get');
     if (params) {
-      rb.query('l', params.l, {});
+      rb.path('id', params.id, {});
     }
 
     return this.http.request(rb.build({
@@ -295,7 +298,7 @@ export class LivroControllerService extends BaseService {
    * This method doesn't expect any request body.
    */
   buscar(params: {
-    l: LivroDto;
+    id: number;
   },
   context?: HttpContext
 

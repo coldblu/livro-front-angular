@@ -4,13 +4,13 @@ import {HomeComponent} from "./core/home/home.component";
 import {livroRoutes} from "./pages/livro/livro-routing.module";
 
 const routes: Routes = [
-  {
+  /*{
     path: '',
     pathMatch: 'full',
     redirectTo: 'home',
-  },
+  },*/
   {
-    path: "home",
+    path: "",
     component: HomeComponent,
     children: [...livroRoutes]
   }
