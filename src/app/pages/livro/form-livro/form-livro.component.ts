@@ -20,7 +20,7 @@ export class FormLivroComponent {
   public readonly ACAO_INCLUIR = "Incluir";
   public readonly ACAO_EDITAR = "Editar";
   acao: string = this.ACAO_INCLUIR;
-  id_livro!: number | undefined;
+  id_livro!: number | 0;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -33,7 +33,7 @@ export class FormLivroComponent {
   ) {
     this.createForm();
     this._adapter.setLocale('pt-br');
-    //this.prepararEdicao();
+    this.prepararEdicao();
 
   }
 
@@ -65,7 +65,7 @@ export class FormLivroComponent {
       if(!this.id_livro){
         this.realizarInclusao();
       }else{
-        //this.realizarEdicao();
+        this.realizarEdicao();
       }
     }
 
@@ -99,7 +99,31 @@ export class FormLivroComponent {
     });
 
   }
-/*
+
+  confirmarAcao(livroDto: LivroDto, acao: string) {
+    const dialogRef = this.dialog.open(ConfirmationDialog, {
+      data: {
+        titulo: 'Mensagem!!!',
+        mensagem: `Ação de ${acao} dados: ${livroDto.titulo} (ID: ${livroDto.idLivro}) realizada com sucesso!`,
+        textoBotoes: {
+          ok: 'ok',
+        },
+      },
+    });
+
+  }
+  // showError(erro: MessageResponse, acao: string) {
+  //   const dialogRef = this.dialog.open(ConfirmationDialog, {
+  //     data: {
+  //       titulo: `Erro ao ${acao}`,
+  //       mensagem: erro.message,
+  //       textoBotoes: {
+  //         ok: 'ok',
+  //       },
+  //     },
+  //   });
+  // }
+
   private prepararEdicao() {
     const paramId = this.route.snapshot.paramMap.get('id');
     if (paramId){
@@ -109,7 +133,7 @@ export class FormLivroComponent {
         retorno => {
           this.acao = this.ACAO_EDITAR;
           console.log("retorno", retorno);
-          this.id_livro = retorno.idLivro;
+          //this.id_livro = retorno.idLivro;
           this.formGroup.patchValue(retorno);
         }
       )
@@ -118,14 +142,14 @@ export class FormLivroComponent {
 
   private realizarEdicao() {
     console.log("Dados:", this.formGroup.value);
-    this.livroService.alterar( body: this.formGroup.value})
+    this.livroService.alterar( {id: this.id_livro, body: this.formGroup.value})
       .subscribe(retorno => {
         console.log("Retorno:", retorno);
         this.confirmarAcao(retorno, this.ACAO_EDITAR);
         this.router.navigate(["/livros"]);
       }, erro => {
         console.log("Erro:", erro.error);
-        this.showError(erro.error, this.ACAO_EDITAR);
-      };)
-  }*/
+        //this.showError(erro.error, this.ACAO_EDITAR);
+      })
+  }
 }

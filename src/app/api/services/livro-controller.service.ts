@@ -27,7 +27,7 @@ export class LivroControllerService extends BaseService {
   /**
    * Path part for operation alterar
    */
-  static readonly AlterarPath = '/api/v1/livro/alterar';
+  static readonly AlterarPath = '/api/v1/livro/alterar/{id}';
 
   /**
    * Método utilizado para altlerar os dados de um livro
@@ -38,6 +38,7 @@ export class LivroControllerService extends BaseService {
    * This method sends `application/json` and handles request body of type `application/json`.
    */
   alterar$Response(params: {
+    id: number;
     body: LivroAlteravelDto
   },
   context?: HttpContext
@@ -46,6 +47,7 @@ export class LivroControllerService extends BaseService {
 
     const rb = new RequestBuilder(this.rootUrl, LivroControllerService.AlterarPath, 'put');
     if (params) {
+      rb.path('id', params.id, {});
       rb.body(params.body, 'application/json');
     }
 
@@ -70,6 +72,7 @@ export class LivroControllerService extends BaseService {
    * This method sends `application/json` and handles request body of type `application/json`.
    */
   alterar(params: {
+    id: number;
     body: LivroAlteravelDto
   },
   context?: HttpContext
