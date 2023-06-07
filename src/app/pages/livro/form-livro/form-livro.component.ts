@@ -20,7 +20,7 @@ export class FormLivroComponent {
   public readonly ACAO_INCLUIR = "Incluir";
   public readonly ACAO_EDITAR = "Editar";
   acao: string = this.ACAO_INCLUIR;
-  id_livro!: number | 0;
+  id_livro!: number;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -34,12 +34,11 @@ export class FormLivroComponent {
     this.createForm();
     this._adapter.setLocale('pt-br');
     this.prepararEdicao();
-
   }
 
   createForm() {
     if(this.acao == "Editar"){
-      this.livroService.buscar({id: this.id_livro}).subscribe(retorno =>
+      this.livroService.buscar({id: this.id_livro as number}).subscribe(retorno =>
         this.formGroup = this.formBuilder.group({
           titulo: [retorno.titulo, Validators.required],
           autor: [retorno.autor, Validators.required],
@@ -128,21 +127,25 @@ export class FormLivroComponent {
     const paramId = this.route.snapshot.paramMap.get('id');
     if (paramId){
       const codigo = parseInt(paramId);
-      console.log("id",paramId);
-      this.livroService.buscar({id: this.id_livro}).subscribe(
+      console.log("codigo",paramId);
+      this.livroService.buscar({id: codigo}).subscribe(
         retorno => {
           this.acao = this.ACAO_EDITAR;
           console.log("retorno", retorno);
-          //this.id_livro = retorno.idLivro;
+          this.id_livro = retorno.idLivro = 0;
           this.formGroup.patchValue(retorno);
+        },error => {
+              console.log("erro", error);
         }
       )
     }
-  }
+}
+
+
 
   private realizarEdicao() {
     console.log("Dados:", this.formGroup.value);
-    this.livroService.alterar( {id: this.id_livro, body: this.formGroup.value})
+    this.livroService.alterar( {id: this.id_livro as number, body: this.formGroup.value})
       .subscribe(retorno => {
         console.log("Retorno:", retorno);
         this.confirmarAcao(retorno, this.ACAO_EDITAR);
