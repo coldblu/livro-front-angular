@@ -132,7 +132,7 @@ export class FormLivroComponent {
         retorno => {
           this.acao = this.ACAO_EDITAR;
           console.log("retorno", retorno);
-          this.id_livro = retorno.idLivro = 0;
+          this.id_livro = retorno.idLivro || 0;
           this.formGroup.patchValue(retorno);
         },error => {
               console.log("erro", error);

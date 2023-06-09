@@ -172,20 +172,20 @@
           }
         ],
         "responses": {
-          "404": {
-            "description": "Livro não encontrado",
+          "200": {
+            "description": "Livro encontrado",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/LivroDTO"
                 }
               }
             }
           },
-          "200": {
-            "description": "Livro encontrado",
+          "404": {
+            "description": "Livro não encontrado",
             "content": {
-              "application/json": {
+              "*/*": {
                 "schema": {
                   "$ref": "#/components/schemas/LivroDTO"
                 }
