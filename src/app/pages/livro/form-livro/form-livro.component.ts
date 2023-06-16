@@ -52,9 +52,9 @@ export class FormLivroComponent {
         titulo: [null, Validators.required],
         autor: [null, Validators.required],
         editora: [null, Validators.required],
-        anoPubli: [null, Validators.required],
+        anoPublicacao: [null, Validators.required],
         genero: [null, Validators.required],
-        paginas: [null, Validators.required]
+        numeroDePaginas: [null, Validators.required]
       })
     }
   }
