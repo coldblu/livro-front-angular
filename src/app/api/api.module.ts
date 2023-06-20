@@ -4,6 +4,7 @@ import { NgModule, ModuleWithProviders, SkipSelf, Optional } from '@angular/core
 import { HttpClient } from '@angular/common/http';
 import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 
+import { EmprestimoControllerService } from './services/emprestimo-controller.service';
 import { LivroControllerService } from './services/livro-controller.service';
 
 /**
@@ -14,6 +15,7 @@ import { LivroControllerService } from './services/livro-controller.service';
   exports: [],
   declarations: [],
   providers: [
+    EmprestimoControllerService,
     LivroControllerService,
     ApiConfiguration
   ],

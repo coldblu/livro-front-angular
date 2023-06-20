@@ -17,12 +17,19 @@ import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from "@angular/material/form-field";
 import { ConfirmationDialog } from './core/confirmation-dialog/confirmation-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
+import { FormEmprestimoComponent } from './pages/emprestimos/form-emprestimo/form-emprestimo.component';
+import { HomeEmprestimoComponent } from './pages/emprestimos/home-emprestimo/home-emprestimo.component';
+import { ListEmprestimoComponent } from './pages/emprestimos/list-emprestimo/list-emprestimo.component';
+import {MatCardModule} from "@angular/material/card";
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    ConfirmationDialog
+    ConfirmationDialog,
+    FormEmprestimoComponent,
+    HomeEmprestimoComponent,
+    ListEmprestimoComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +43,8 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
     MatDividerModule,
     LivroModule,
     MatDialogModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatCardModule
   ],
   providers: [
     {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}}

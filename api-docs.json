@@ -15,6 +15,38 @@
     }
   ],
   "paths": {
+    "/api/v1/livro/devolucao/{id}": {
+      "put": {
+        "tags": [
+          "emprestimo-controller"
+        ],
+        "description": "Método utilizado para finalizar um emprestimo.",
+        "operationId": "devolucao",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Emprestimo finalizado!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmprestimoDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/livro/alterar/{id}": {
       "put": {
         "tags": [
@@ -88,6 +120,38 @@
         }
       }
     },
+    "/api/v1/livro/excluirEmprestimo/{id}": {
+      "post": {
+        "tags": [
+          "emprestimo-controller"
+        ],
+        "description": "Método utilizado para deletar registro do emprestimo",
+        "operationId": "excluirEmprestimo",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Emprestimo Excluído",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Emprestimo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/livro/deletar/{id}": {
       "post": {
         "tags": [
@@ -130,6 +194,38 @@
         }
       }
     },
+    "/api/v1/livro/verificarEmprestimoAtivo/{livroId}": {
+      "get": {
+        "tags": [
+          "emprestimo-controller"
+        ],
+        "description": "Verificar se o livro possui empréstimo ativo",
+        "operationId": "verificarEmprestimoAtivo",
+        "parameters": [
+          {
+            "name": "livroId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Verificação concluída",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/livro/listar": {
       "get": {
         "tags": [
@@ -148,6 +244,62 @@
             "description": "Listagem de livros",
             "content": {
               "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/livro/finalizados": {
+      "get": {
+        "tags": [
+          "emprestimo-controller"
+        ],
+        "description": "Listar empréstimos finalizados",
+        "operationId": "listarEmprestimosFinalizados",
+        "responses": {
+          "200": {
+            "description": "Lista de empréstimos finalizados",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EmprestimoDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/livro/emprestar/{id}": {
+      "get": {
+        "tags": [
+          "emprestimo-controller"
+        ],
+        "description": "Emprestar livro.",
+        "operationId": "emprestar",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Emprestimo realizado com sucesso!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmprestimoDTO"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Erro ao realizar emprestimo.",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmprestimoDTO"
+                }
+              }
             }
           }
         }
@@ -194,10 +346,58 @@
           }
         }
       }
+    },
+    "/api/v1/livro/ativos": {
+      "get": {
+        "tags": [
+          "emprestimo-controller"
+        ],
+        "description": "Listar empréstimos ativos",
+        "operationId": "listarEmprestimosAtivos",
+        "responses": {
+          "200": {
+            "description": "Lista de empréstimos ativos",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EmprestimoDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
+      "EmprestimoDTO": {
+        "type": "object",
+        "properties": {
+          "idEmprestimo": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "livroID": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "nomePessoa": {
+            "type": "string"
+          },
+          "dataEmprestimo": {
+            "type": "string",
+            "format": "date"
+          },
+          "dataDevolucao": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      },
       "LivroAlteravelDTO": {
         "type": "object",
         "properties": {
@@ -251,6 +451,30 @@
             "format": "int32"
           },
           "dataDeRegistro": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      },
+      "Emprestimo": {
+        "type": "object",
+        "properties": {
+          "idEmprestimo": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "livroID": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "nomePessoa": {
+            "type": "string"
+          },
+          "dataEmprestimo": {
+            "type": "string",
+            "format": "date"
+          },
+          "dataDevolucao": {
             "type": "string",
             "format": "date"
           }

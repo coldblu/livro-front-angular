@@ -1,0 +1,18 @@
+<mat-card>
+    <mat-card-header>
+      <mat-card-title>Emprestimos</mat-card-title>
+    </mat-card-header>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" [routerLink]="['/emprestimos','ativos']">
+        <mat-icon>list</mat-icon>
+        <span>Emprestimos Ativos</span>
+      </button>
+      <button mat-raised-button color="primary" [routerLink]="['/emprestimos','finalizados']">
+        <mat-icon>list</mat-icon>
+        <span>Emprestimos Finalizados</span>
+      </button>
+    </mat-card-actions>
+    <mat-card-content>
+        <router-outlet></router-outlet>
+    </mat-card-content>
+  </mat-card>
