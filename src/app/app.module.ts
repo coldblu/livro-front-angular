@@ -13,23 +13,22 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import {LivroModule} from "./pages/livro/livro.module";
+
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from "@angular/material/form-field";
 import { ConfirmationDialog } from './core/confirmation-dialog/confirmation-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
-import { FormEmprestimoComponent } from './pages/emprestimos/form-emprestimo/form-emprestimo.component';
-import { HomeEmprestimoComponent } from './pages/emprestimos/home-emprestimo/home-emprestimo.component';
-import { ListEmprestimoComponent } from './pages/emprestimos/list-emprestimo/list-emprestimo.component';
 import {MatCardModule} from "@angular/material/card";
+import {ReactiveFormsModule} from "@angular/forms";
+import {MatInputModule} from "@angular/material/input";
+import {MatTableModule} from "@angular/material/table";
+import {EmprestimoModule} from "./pages/emprestimos/emprestimo.module";
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    ConfirmationDialog,
-    FormEmprestimoComponent,
-    HomeEmprestimoComponent,
-    ListEmprestimoComponent
+    ConfirmationDialog
   ],
   imports: [
     BrowserModule,
@@ -44,7 +43,11 @@ import {MatCardModule} from "@angular/material/card";
     LivroModule,
     MatDialogModule,
     MatSnackBarModule,
-    MatCardModule
+    MatCardModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatTableModule,
+    EmprestimoModule
   ],
   providers: [
     {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}}

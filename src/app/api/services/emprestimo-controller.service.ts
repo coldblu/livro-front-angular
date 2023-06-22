@@ -11,6 +11,7 @@ import { map, filter } from 'rxjs/operators';
 
 import { Emprestimo } from '../models/emprestimo';
 import { EmprestimoDto } from '../models/emprestimo-dto';
+import { EmprestimoListaDto } from '../models/emprestimo-lista-dto';
 
 @Injectable({
   providedIn: 'root',
@@ -138,6 +139,63 @@ export class EmprestimoControllerService extends BaseService {
   }
 
   /**
+   * Path part for operation emprestar
+   */
+  static readonly EmprestarPath = '/api/v1/livro/emprestar';
+
+  /**
+   * Emprestar livro.
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `emprestar()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  emprestar$Response(params: {
+    body: EmprestimoDto
+  },
+  context?: HttpContext
+
+): Observable<StrictHttpResponse<EmprestimoDto>> {
+
+    const rb = new RequestBuilder(this.rootUrl, EmprestimoControllerService.EmprestarPath, 'post');
+    if (params) {
+      rb.body(params.body, 'application/json');
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json',
+      context: context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<EmprestimoDto>;
+      })
+    );
+  }
+
+  /**
+   * Emprestar livro.
+   *
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `emprestar$Response()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  emprestar(params: {
+    body: EmprestimoDto
+  },
+  context?: HttpContext
+
+): Observable<EmprestimoDto> {
+
+    return this.emprestar$Response(params,context).pipe(
+      map((r: StrictHttpResponse<EmprestimoDto>) => r.body as EmprestimoDto)
+    );
+  }
+
+  /**
    * Path part for operation verificarEmprestimoAtivo
    */
   static readonly VerificarEmprestimoAtivoPath = '/api/v1/livro/verificarEmprestimoAtivo/{livroId}';
@@ -211,7 +269,7 @@ export class EmprestimoControllerService extends BaseService {
   },
   context?: HttpContext
 
-): Observable<StrictHttpResponse<Array<EmprestimoDto>>> {
+): Observable<StrictHttpResponse<Array<EmprestimoListaDto>>> {
 
     const rb = new RequestBuilder(this.rootUrl, EmprestimoControllerService.ListarEmprestimosFinalizadosPath, 'get');
     if (params) {
@@ -224,7 +282,7 @@ export class EmprestimoControllerService extends BaseService {
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Array<EmprestimoDto>>;
+        return r as StrictHttpResponse<Array<EmprestimoListaDto>>;
       })
     );
   }
@@ -241,64 +299,10 @@ export class EmprestimoControllerService extends BaseService {
   },
   context?: HttpContext
 
-): Observable<Array<EmprestimoDto>> {
+): Observable<Array<EmprestimoListaDto>> {
 
     return this.listarEmprestimosFinalizados$Response(params,context).pipe(
-      map((r: StrictHttpResponse<Array<EmprestimoDto>>) => r.body as Array<EmprestimoDto>)
-    );
-  }
-
-  /**
-   * Path part for operation emprestar
-   */
-  static readonly EmprestarPath = '/api/v1/livro/emprestar/{id}';
-
-  /**
-   * Emprestar livro.
-   *
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `emprestar()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  emprestar$Response(params?: {
-  },
-  context?: HttpContext
-
-): Observable<StrictHttpResponse<EmprestimoDto>> {
-
-    const rb = new RequestBuilder(this.rootUrl, EmprestimoControllerService.EmprestarPath, 'get');
-    if (params) {
-    }
-
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json',
-      context: context
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<EmprestimoDto>;
-      })
-    );
-  }
-
-  /**
-   * Emprestar livro.
-   *
-   * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `emprestar$Response()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  emprestar(params?: {
-  },
-  context?: HttpContext
-
-): Observable<EmprestimoDto> {
-
-    return this.emprestar$Response(params,context).pipe(
-      map((r: StrictHttpResponse<EmprestimoDto>) => r.body as EmprestimoDto)
+      map((r: StrictHttpResponse<Array<EmprestimoListaDto>>) => r.body as Array<EmprestimoListaDto>)
     );
   }
 
@@ -319,7 +323,7 @@ export class EmprestimoControllerService extends BaseService {
   },
   context?: HttpContext
 
-): Observable<StrictHttpResponse<Array<EmprestimoDto>>> {
+): Observable<StrictHttpResponse<Array<EmprestimoListaDto>>> {
 
     const rb = new RequestBuilder(this.rootUrl, EmprestimoControllerService.ListarEmprestimosAtivosPath, 'get');
     if (params) {
@@ -332,7 +336,7 @@ export class EmprestimoControllerService extends BaseService {
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Array<EmprestimoDto>>;
+        return r as StrictHttpResponse<Array<EmprestimoListaDto>>;
       })
     );
   }
@@ -349,10 +353,10 @@ export class EmprestimoControllerService extends BaseService {
   },
   context?: HttpContext
 
-): Observable<Array<EmprestimoDto>> {
+): Observable<Array<EmprestimoListaDto>> {
 
     return this.listarEmprestimosAtivos$Response(params,context).pipe(
-      map((r: StrictHttpResponse<Array<EmprestimoDto>>) => r.body as Array<EmprestimoDto>)
+      map((r: StrictHttpResponse<Array<EmprestimoListaDto>>) => r.body as Array<EmprestimoListaDto>)
     );
   }
 

@@ -15,7 +15,7 @@ export const emprestimoRoutes: Routes = [
         component: ListEmprestimoComponent
       },
       {
-        path: "emprestar",
+        path: "emprestar/:id",
         component: FormEmprestimoComponent
       }
     ]

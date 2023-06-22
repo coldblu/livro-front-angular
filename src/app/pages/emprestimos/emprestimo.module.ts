@@ -35,7 +35,7 @@ import {emprestimoRoutes} from "./emprestimo-routing.module";
     MatInputModule,
     MatDatepickerModule,
     ReactiveFormsModule,
-    MatNativeDateModule
+    MatNativeDateModule,
   ]
 })
 export class EmprestimoModule { }

@@ -1,1 +1,41 @@
-<p>list-emprestimo works!</p>
+<section class="example-container mat-elevation-z8" tabindex="0">
+    <table mat-table [dataSource]="emprestimoDataSource">
+
+      <!-- ID Emprestimo -->
+      <ng-container matColumnDef="idEmprestimo">
+        <th mat-header-cell *matHeaderCellDef> ID </th>
+        <td mat-cell *matCellDef="let element"> {{element.idEmprestimo}} </td>
+      </ng-container>
+
+      <!-- Livro id -->
+      <ng-container matColumnDef="livroID">
+        <th mat-header-cell *matHeaderCellDef> ID Livro </th>
+        <td mat-cell *matCellDef="let element"> {{element.livroID}} </td>
+      </ng-container>
+
+      <!-- Nome da pessoa que pegou emprestado -->
+      <ng-container matColumnDef="nomePessoa">
+        <th mat-header-cell *matHeaderCellDef> Nome Pessoa </th>
+        <td mat-cell *matCellDef="let element"> {{element.nomePessoa}} </td>
+      </ng-container>
+
+      <!-- Data do emprestimo -->
+      <ng-container matColumnDef="dataEmprestimo">
+        <th mat-header-cell *matHeaderCellDef> Data do Emprestimo </th>
+        <td mat-cell *matCellDef="let element"> {{element.dataEmprestimo}} </td>
+      </ng-container>
+
+      <!-- Ação  -->
+      <ng-container matColumnDef="acao">
+        <th mat-header-cell class="coluna" *matHeaderCellDef> Ação </th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-icon-button (click)="confirmarFinalizar(element)">
+            <mat-icon>event</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="colunasMostrar; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: colunasMostrar;"></tr>
+    </table>
+  </section>

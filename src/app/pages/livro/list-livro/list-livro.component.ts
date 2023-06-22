@@ -5,6 +5,7 @@ import {LivroControllerService} from "../../../api/services/livro-controller.ser
 import {MatDialog} from "@angular/material/dialog";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {ConfirmationDialog,  ConfirmationDialogResult} from "../../../core/confirmation-dialog/confirmation-dialog.component";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-livro',
@@ -18,13 +19,16 @@ export class ListLivroComponent implements OnInit {
   constructor(
     public livroService: LivroControllerService,
     private dialog: MatDialog,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private router: Router
     ){
   }
 
   ngOnInit(): void {
     this.buscarDados();
   }
+
+ 
 
   private buscarDados() {
     this.livroService.listAll().subscribe(data => {

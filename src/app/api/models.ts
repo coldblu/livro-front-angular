@@ -3,3 +3,4 @@ export { LivroAlteravelDto } from './models/livro-alteravel-dto';
 export { LivroDto } from './models/livro-dto';
 export { Emprestimo } from './models/emprestimo';
 export { Livro } from './models/livro';
+export { EmprestimoListaDto } from './models/emprestimo-lista-dto';

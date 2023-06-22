@@ -1,1 +1,17 @@
-<p>form-emprestimo works!</p>
+
+<form
+  [formGroup]="formGroup"
+  (ngSubmit)="onSubmit()"
+  class="form"
+>
+  <div class="formEmprestimo">
+    <h1>Formulário para Emprestimo</h1>
+    <mat-form-field>
+      <mat-label>Nome da pessoa:</mat-label>
+      <input matInput formControlName="nomePessoa">
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit">Emprestar</button>
+  </div>
+</form>
+
