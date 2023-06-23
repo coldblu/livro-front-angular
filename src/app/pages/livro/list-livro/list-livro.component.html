@@ -41,7 +41,7 @@
         <button mat-icon-button [routerLink]="['/livros',element.idLivro]">
           <mat-icon>edit</mat-icon>
         </button>
-        <button mat-icon-button [routerLink]="['/emprestimos/emprestar',element.idLivro]">
+        <button mat-icon-button [routerLink]="['/emprestimos/emprestar',element.idLivro]" [disabled]="element.emprestado">
           <mat-icon>event</mat-icon>
         </button>
       </td>

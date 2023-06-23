@@ -32,7 +32,7 @@ export class ListEmprestimoComponent implements OnInit{
   private buscarDados() {
     this.emprestimoService.listarEmprestimosAtivos().subscribe(data => {
       this.emprestimoDataSource.data = data;
-      console.log(JSON.stringify(data));
+      console.log(data);
     })
   }
 

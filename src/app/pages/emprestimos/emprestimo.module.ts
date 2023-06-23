@@ -16,12 +16,14 @@ import {FormEmprestimoComponent} from "./form-emprestimo/form-emprestimo.compone
 import {HomeEmprestimoComponent} from "./home-emprestimo/home-emprestimo.component";
 import {ListEmprestimoComponent} from "./list-emprestimo/list-emprestimo.component";
 import {emprestimoRoutes} from "./emprestimo-routing.module";
+import { ListEmprestimoFinalizadosComponent } from './list-emprestimo-finalizados/list-emprestimo-finalizados.component';
 
 @NgModule({
   declarations: [
     FormEmprestimoComponent,
     HomeEmprestimoComponent,
-    ListEmprestimoComponent
+    ListEmprestimoComponent,
+    ListEmprestimoFinalizadosComponent
   ],
   imports: [
     CommonModule,
