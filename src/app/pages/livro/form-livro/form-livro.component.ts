@@ -43,9 +43,9 @@ export class FormLivroComponent {
           titulo: [retorno.titulo, Validators.required],
           autor: [retorno.autor, Validators.required],
           editora: [retorno.editora, Validators.required],
-          anoPubli: [retorno.anoPublicacao, Validators.required],
+          anoPublicacao: [retorno.anoPublicacao, Validators.required],
           genero: [retorno.genero, Validators.required],
-          paginas: [retorno.numeroDePaginas, Validators.required]
+          numeroDePaginas: [retorno.numeroDePaginas, Validators.required]
         }));
     }else{
       this.formGroup = this.formBuilder.group({
