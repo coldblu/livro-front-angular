@@ -37,6 +37,14 @@
       <mat-icon>help</mat-icon>
       <span>Help</span>
     </button>
+
+    <!-- Botão "Logout" que só é exibido para usuários autenticados -->
+    <div *ngIf="securityService.isValid()">
+      <button mat-button class="menu-button" (click)="logout()">
+        <mat-icon>exit_to_app</mat-icon>
+        <span>Logout</span>
+      </button>
+    </div>
   </mat-sidenav>
   <mat-sidenav-content>
     <div class="content mat-elevation-z8">

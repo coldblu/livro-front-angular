@@ -36,6 +36,17 @@ export class SecurityService {
     this.onUnauthorized = new EventEmitter<Credential>();
   }
 
+  public login(user: User): void {
+    // Armazenar os dados de autenticação no localStorage
+    localStorage.setItem('authData', JSON.stringify(user));
+    this.init(user);
+  }
+
+  public logout(): void {
+    // Limpar os dados de autenticação do localStorage
+    localStorage.removeItem('authData');
+    this.invalidate();
+  }
   /**
    * Init security service.
    *

@@ -4,6 +4,8 @@ import {HomeComponent} from "./core/home/home.component";
 import {livroRoutes} from "./pages/livro/livro-routing.module";
 import {emprestimoRoutes} from "./pages/emprestimos/emprestimo-routing.module";
 import {AutenticacaoRoutes} from "./arquitetura/autenticacao/autenticacao.routing";
+import {SecurityGuard} from "./arquitetura/security/security.guard";
+import {profileRoutes} from "./pages/profile/profile-routing.module";
 
 const routes: Routes = [
   /*{
@@ -16,8 +18,10 @@ const routes: Routes = [
     component: HomeComponent,
     children: [
       ...livroRoutes,
-      ...emprestimoRoutes
+      ...emprestimoRoutes,
+        ...profileRoutes
     ]
+
   },
   {
     path: "acesso",

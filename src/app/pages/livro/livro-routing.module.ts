@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {HomeLivroComponent} from "./home-livro/home-livro.component";
 import {ListLivroComponent} from "./list-livro/list-livro.component";
 import {FormLivroComponent} from "./form-livro/form-livro.component";
+import {SecurityGuard} from "../../arquitetura/security/security.guard";
 
 export const livroRoutes: Routes = [
   {
@@ -21,6 +22,8 @@ export const livroRoutes: Routes = [
         path: ":id",
         component: FormLivroComponent
       }
-    ]
+    ],
+    canActivate: [SecurityGuard],
+    data: {security: {roles: ['ROLE_USER']}}
   }
 ];

@@ -33,13 +33,18 @@ import {SecurityModule} from "./arquitetura/security/security.module";
 import {SecurityInterceptor} from "./arquitetura/security/security.interceptor";
 import {MessageModule} from "./arquitetura/message/message.module";
 import {AppInterceptor} from "./arquitetura/app.interceptor";
+import { HomeProfileComponent } from './pages/profie/home-profile/home-profile.component';
+import { ListEmprestimoProfileComponent } from './pages/profie/list-emprestimo-profile/list-emprestimo-profile.component';
+import {ProfileModule} from "./pages/profile/profile.module";
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     ConfirmationDialog,
-    LoaderDialogComponent
+    LoaderDialogComponent,
+    HomeProfileComponent,
+    ListEmprestimoProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -59,6 +64,7 @@ import {AppInterceptor} from "./arquitetura/app.interceptor";
     MatInputModule,
     MatTableModule,
     EmprestimoModule,
+    ProfileModule,
     MessageModule,
     SecurityModule,
     AutenticacaoModule,
