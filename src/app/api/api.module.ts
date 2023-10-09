@@ -6,6 +6,8 @@ import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 
 import { EmprestimoControllerService } from './services/emprestimo-controller.service';
 import { LivroControllerService } from './services/livro-controller.service';
+import { PessoaControllerService } from './services/pessoa-controller.service';
+import { AuthControllerService } from './services/auth-controller.service';
 
 /**
  * Module that provides all services and configuration.
@@ -17,6 +19,8 @@ import { LivroControllerService } from './services/livro-controller.service';
   providers: [
     EmprestimoControllerService,
     LivroControllerService,
+    PessoaControllerService,
+    AuthControllerService,
     ApiConfiguration
   ],
 })

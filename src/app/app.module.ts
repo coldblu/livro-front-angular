@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { HomeComponent } from './core/home/home.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -24,11 +24,22 @@ import {MatInputModule} from "@angular/material/input";
 import {MatTableModule} from "@angular/material/table";
 import {EmprestimoModule} from "./pages/emprestimos/emprestimo.module";
 
+
+import {LoaderModule} from "./arquitetura/loader/loader.module";
+import {LoaderDialogComponent} from "./arquitetura/loader-dialog/loader-dialog.component";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {AutenticacaoModule} from "./arquitetura/autenticacao/autenticacao.module";
+import {SecurityModule} from "./arquitetura/security/security.module";
+import {SecurityInterceptor} from "./arquitetura/security/security.interceptor";
+import {MessageModule} from "./arquitetura/message/message.module";
+import {AppInterceptor} from "./arquitetura/app.interceptor";
+
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    ConfirmationDialog
+    ConfirmationDialog,
+    LoaderDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -47,10 +58,32 @@ import {EmprestimoModule} from "./pages/emprestimos/emprestimo.module";
     ReactiveFormsModule,
     MatInputModule,
     MatTableModule,
-    EmprestimoModule
+    EmprestimoModule,
+    MessageModule,
+    SecurityModule,
+    AutenticacaoModule,
+    MatProgressSpinnerModule,
+    AutenticacaoModule,
+    LoaderModule,
+    MessageModule.forRoot(),
+    SecurityModule,//TODO conferir a configuração
+    SecurityModule.forRoot({
+      nameStorage: 'portalSSOSecurityStorage',
+      loginRouter: '/acesso/login'
+    }),
   ],
   providers: [
-    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}}
+    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}},
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AppInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: SecurityInterceptor,
+      multi: true
+    },
   ],
   bootstrap: [AppComponent]
 })

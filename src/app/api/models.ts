@@ -1,6 +1,14 @@
 export { EmprestimoDto } from './models/emprestimo-dto';
 export { LivroAlteravelDto } from './models/livro-alteravel-dto';
 export { LivroDto } from './models/livro-dto';
+export { PessoaDto } from './models/pessoa-dto';
 export { Emprestimo } from './models/emprestimo';
 export { Livro } from './models/livro';
+export { Pessoa } from './models/pessoa';
+export { GrantedAuthority } from './models/granted-authority';
+export { Usuario } from './models/usuario';
+export { FieldResponse } from './models/field-response';
+export { MessageResponse } from './models/message-response';
+export { AuthDto } from './models/auth-dto';
+export { CadastroDto } from './models/cadastro-dto';
 export { EmprestimoListaDto } from './models/emprestimo-lista-dto';

@@ -5,5 +5,5 @@ export interface EmprestimoListaDto {
   dataEmprestimo?: string;
   idEmprestimo?: number;
   livroID?: number;
-  nomePessoa?: string;
+  pessoaID?: number;
 }
