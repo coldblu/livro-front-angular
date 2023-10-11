@@ -13,8 +13,6 @@ export const profileRoutes: Routes = [
         path: "",
         component: ListEmprestimoProfileComponent
       }
-    ],
-    canActivate: [SecurityGuard],
-    data: {security: {roles: ['ROLE_USER']}}
+    ]
   }
 ];

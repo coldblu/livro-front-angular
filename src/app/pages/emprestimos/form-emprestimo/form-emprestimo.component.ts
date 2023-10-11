@@ -37,7 +37,7 @@ export class FormEmprestimoComponent {
 
   createForm() {
       this.formGroup = this.formBuilder.group({
-        nomePessoa: [null, Validators.required],
+        pessoaID: [null, Validators.required],
         livroID: [null]
       })
   }

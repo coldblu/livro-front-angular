@@ -360,4 +360,58 @@ export class EmprestimoControllerService extends BaseService {
     );
   }
 
+  /**
+   * Path part for operation listarEmprestimosAtivosDaPessoa
+   */
+  static readonly ListarEmprestimosAtivosDaPessoaPath = '/api/v1/livro/ativosDePessoa';
+
+  /**
+   * Listar empréstimos ativos de uma pessoa
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `listarEmprestimosAtivosDaPessoa()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  listarEmprestimosAtivosDaPessoa$Response(params?: {
+  },
+  context?: HttpContext
+
+): Observable<StrictHttpResponse<Array<EmprestimoListaDto>>> {
+
+    const rb = new RequestBuilder(this.rootUrl, EmprestimoControllerService.ListarEmprestimosAtivosDaPessoaPath, 'get');
+    if (params) {
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json',
+      context: context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<Array<EmprestimoListaDto>>;
+      })
+    );
+  }
+
+  /**
+   * Listar empréstimos ativos de uma pessoa
+   *
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `listarEmprestimosAtivosDaPessoa$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  listarEmprestimosAtivosDaPessoa(params?: {
+  },
+  context?: HttpContext
+
+): Observable<Array<EmprestimoListaDto>> {
+
+    return this.listarEmprestimosAtivosDaPessoa$Response(params,context).pipe(
+      map((r: StrictHttpResponse<Array<EmprestimoListaDto>>) => r.body as Array<EmprestimoListaDto>)
+    );
+  }
+
 }
