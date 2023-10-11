@@ -26,7 +26,7 @@
       <mat-icon>person</mat-icon>
       <span>Livros</span>
     </button>
-    <button mat-button class="menu-button" routerLink="/emprestimos">
+    <button mat-button class="menu-button" routerLink="/emprestimos" *ngIf="!securityService.hasRoles('ROLE_USER')">
       <mat-icon>event</mat-icon>
       <span>Emprestimos</span>
     </button>

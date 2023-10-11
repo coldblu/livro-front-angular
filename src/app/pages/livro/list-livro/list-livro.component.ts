@@ -6,6 +6,9 @@ import {MatDialog} from "@angular/material/dialog";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {ConfirmationDialog,  ConfirmationDialogResult} from "../../../core/confirmation-dialog/confirmation-dialog.component";
 import { Router } from '@angular/router';
+import {SecurityService} from "../../../arquitetura/security/security.service";
+import {EmprestimoControllerService} from "../../../api/services/emprestimo-controller.service";
+import {EmprestimoDto} from "../../../api/models/emprestimo-dto";
 
 @Component({
   selector: 'app-list-livro',
@@ -18,9 +21,11 @@ export class ListLivroComponent implements OnInit {
 
   constructor(
     public livroService: LivroControllerService,
+    public emprestimoService: EmprestimoControllerService,
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    private securityService: SecurityService
     ){
   }
 
@@ -28,7 +33,7 @@ export class ListLivroComponent implements OnInit {
     this.buscarDados();
   }
 
- 
+
 
   private buscarDados() {
     this.livroService.listAll().subscribe(data => {
@@ -36,6 +41,44 @@ export class ListLivroComponent implements OnInit {
       console.log(JSON.stringify(data));
     })
   }
+
+  emprestarLivro(element: any) {
+    if (this.securityService.hasRoles('ROLE_ADMIN')) {
+      this.router.navigate(['/emprestimos/emprestar', element.idLivro]);
+    } else if (this.securityService.hasRoles('ROLE_USER')) {
+      // Execute a função aqui para usuários ROLE_USER
+      // Por exemplo:
+      this.realizarEmprestimo(element.idLivro);
+    }
+  }
+
+  realizarEmprestimo(idLivro: number) {
+    const body = {
+      pessoaID: this.securityService.getPessoaId(),
+      livroID: idLivro
+    };
+    this.emprestimoService.emprestar({ body })
+      .subscribe(retorno => {
+        console.log("Retorno:", retorno);
+        this.confirmarInclusao(retorno);
+      }, erro => {
+        console.log("Erro:" + erro);
+        alert("Erro ao incluir!");
+      });
+  }
+  confirmarInclusao(emprestimoDto: EmprestimoDto) {
+    const dialogRef = this.dialog.open(ConfirmationDialog, {
+      data: {
+        titulo: 'Mensagem!!!',
+        mensagem: `Emprestimo do Livro(ID): ${emprestimoDto.livroID} (ID emprestimo: ${emprestimoDto.idEmprestimo}) realiza com sucesso!`,
+        textoBotoes: {
+          ok: 'ok',
+        },
+      },
+    });
+
+  }
+
 
   remover(livroDto: LivroDto) {
     console.log("Removido", livroDto.idLivro);

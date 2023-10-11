@@ -5,10 +5,11 @@
  */
 export interface User {
   id: number;
-  nome: string;
   login: string;
+  pessoaId: number;
+  pessoaNome: string;
+  roles?: string[];
   accessToken: string;
   refreshToken: string;
   expiresIn: number;
-  roles?: string[];
 }

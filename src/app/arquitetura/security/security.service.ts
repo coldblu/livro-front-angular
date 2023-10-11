@@ -114,6 +114,10 @@ export class SecurityService {
     return valid;
   }
 
+
+  public getPessoaId(): number | undefined {
+    return this._credential.user?.pessoaId;
+  }
   /**
    * Invalid user's credential.
    */

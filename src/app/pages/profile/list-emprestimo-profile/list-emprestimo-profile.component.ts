@@ -8,6 +8,7 @@ import {
   ConfirmationDialog,
   ConfirmationDialogResult
 } from "../../../core/confirmation-dialog/confirmation-dialog.component";
+import {SecurityService} from "../../../arquitetura/security/security.service";
 
 @Component({
   selector: 'app-list-emprestimo-profile',
@@ -22,7 +23,8 @@ export class ListEmprestimoProfileComponent implements OnInit{
   constructor(
     public emprestimoService: EmprestimoControllerService,
     private dialog: MatDialog,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private securityService: SecurityService
   ){
   }
 
@@ -31,7 +33,7 @@ export class ListEmprestimoProfileComponent implements OnInit{
   }
 
   private buscarDados() {
-    this.emprestimoService.listarEmprestimosAtivos().subscribe(data => {
+    this.emprestimoService.listarEmprestimosAtivosDaPessoa(this.securityService.getPessoaId()).subscribe(data => {
       this.emprestimoDataSource.data = data;
       console.log(data);
     })

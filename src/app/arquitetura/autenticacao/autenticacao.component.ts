@@ -57,8 +57,9 @@ export class AutenticacaoComponent implements OnInit {
       this.autenticationService.login(this.formGroup.value).subscribe(data => {
         const user: User = {
           id: data.id,
-          nome: data.nome,
-          login: data.login,
+          login: data.email,
+          pessoaId: data.pessoaId,
+          pessoaNome: data.pessoaNome,
           expiresIn: data.expiresIn,
           accessToken: data.accessToken,
           refreshToken: data.refreshToken,
