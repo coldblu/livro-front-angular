@@ -363,7 +363,7 @@ export class EmprestimoControllerService extends BaseService {
   /**
    * Path part for operation listarEmprestimosAtivosDaPessoa
    */
-  static readonly ListarEmprestimosAtivosDaPessoaPath = '/api/v1/livro/ativosDePessoa';
+  static readonly ListarEmprestimosAtivosDaPessoaPath = '/api/v1/livro/ativosDePessoa/{id}';
 
   /**
    * Listar empréstimos ativos de uma pessoa
@@ -373,7 +373,8 @@ export class EmprestimoControllerService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  listarEmprestimosAtivosDaPessoa$Response(params?: {
+  listarEmprestimosAtivosDaPessoa$Response(params: {
+    id: number;
   },
   context?: HttpContext
 
@@ -381,6 +382,7 @@ export class EmprestimoControllerService extends BaseService {
 
     const rb = new RequestBuilder(this.rootUrl, EmprestimoControllerService.ListarEmprestimosAtivosDaPessoaPath, 'get');
     if (params) {
+      rb.path('id', params.id, {});
     }
 
     return this.http.request(rb.build({
@@ -403,7 +405,8 @@ export class EmprestimoControllerService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  listarEmprestimosAtivosDaPessoa(params?: {
+  listarEmprestimosAtivosDaPessoa(params: {
+    id: number;
   },
   context?: HttpContext
 

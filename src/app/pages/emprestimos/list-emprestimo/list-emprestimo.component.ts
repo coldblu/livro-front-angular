@@ -15,7 +15,7 @@ import {
   styleUrls: ['./list-emprestimo.component.scss']
 })
 export class ListEmprestimoComponent implements OnInit{
-  colunasMostrar = ['idEmprestimo','livroID', 'nomePessoa', 'dataEmprestimo','acao'];
+  colunasMostrar = ['idEmprestimo','livroNome', 'pessoaNome', 'dataEmprestimo','acao'];
   emprestimoDataSource: MatTableDataSource<EmprestimoDto> = new MatTableDataSource<EmprestimoDto>();
 
   constructor(

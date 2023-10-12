@@ -11,7 +11,6 @@ import { map, filter } from 'rxjs/operators';
 
 import { AuthDto } from '../models/auth-dto';
 import { CadastroDto } from '../models/cadastro-dto';
-import { MessageResponse } from '../models/message-response';
 import { Usuario } from '../models/usuario';
 
 @Injectable({
@@ -23,60 +22,6 @@ export class AuthControllerService extends BaseService {
     http: HttpClient
   ) {
     super(config, http);
-  }
-
-  /**
-   * Path part for operation logout
-   */
-  static readonly LogoutPath = '/api/v1/auth/logout';
-
-  /**
-   * Logout do sistema
-   *
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `logout()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  logout$Response(params?: {
-  },
-  context?: HttpContext
-
-): Observable<StrictHttpResponse<MessageResponse>> {
-
-    const rb = new RequestBuilder(this.rootUrl, AuthControllerService.LogoutPath, 'post');
-    if (params) {
-    }
-
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json',
-      context: context
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<MessageResponse>;
-      })
-    );
-  }
-
-  /**
-   * Logout do sistema
-   *
-   * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `logout$Response()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  logout(params?: {
-  },
-  context?: HttpContext
-
-): Observable<MessageResponse> {
-
-    return this.logout$Response(params,context).pipe(
-      map((r: StrictHttpResponse<MessageResponse>) => r.body as MessageResponse)
-    );
   }
 
   /**

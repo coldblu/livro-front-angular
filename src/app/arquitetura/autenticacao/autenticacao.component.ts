@@ -59,7 +59,7 @@ export class AutenticacaoComponent implements OnInit {
           id: data.id,
           login: data.email,
           pessoaId: data.pessoaId,
-          pessoaNome: data.pessoaNome,
+          pessoaNome: data.nomePessoa,
           expiresIn: data.expiresIn,
           accessToken: data.accessToken,
           refreshToken: data.refreshToken,

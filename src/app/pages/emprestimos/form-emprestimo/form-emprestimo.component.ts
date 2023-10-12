@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { EmprestimoDto } from 'src/app/api/models';
-import {EmprestimoControllerService, LivroControllerService} from 'src/app/api/services';
+import {EmprestimoDto, PessoaDto} from 'src/app/api/models';
+import {EmprestimoControllerService, LivroControllerService, PessoaControllerService} from 'src/app/api/services';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {DateAdapter} from "@angular/material/core";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -19,12 +19,15 @@ export class FormEmprestimoComponent {
   public readonly ACAO_EMPRESTAR = "emprestar";
   acao: string = this.ACAO_EMPRESTAR;
   id_livro!: number;
+  pessoas: PessoaDto[] = [];
+
 
   constructor(
     private formBuilder: FormBuilder,
     private _adapter: DateAdapter<any>,
     public emprestimoService: EmprestimoControllerService,
     public livroService: LivroControllerService,
+    private pessoaService: PessoaControllerService,
     private router: Router,
     private route: ActivatedRoute,
     private dialog: MatDialog,
@@ -33,6 +36,7 @@ export class FormEmprestimoComponent {
     this.createForm();
     this._adapter.setLocale('pt-br');
     this.prepararEmprestimo();
+    this.carregarPessoas();
   }
 
   createForm() {
@@ -40,6 +44,17 @@ export class FormEmprestimoComponent {
         pessoaID: [null, Validators.required],
         livroID: [null]
       })
+  }
+
+  carregarPessoas() {
+    this.pessoaService.listarTodasPessoas().subscribe(
+      (pessoas: PessoaDto[]) => {
+        this.pessoas = pessoas;
+      },
+      (error) => {
+        console.error('Erro ao carregar as pessoas:', error);
+      }
+    );
   }
 
   onSubmit() {
@@ -55,6 +70,7 @@ export class FormEmprestimoComponent {
       .subscribe( retorno =>{
         console.log("Retorno:",retorno);
         this.confirmarInclusao(retorno);
+        this.router.navigate(["/emprestimos"]);
       }, erro =>{
         console.log("Erro:"+erro);
         alert("Erro ao incluir!");

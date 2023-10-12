@@ -8,15 +8,15 @@
       </ng-container>
 
       <!-- Livro id -->
-      <ng-container matColumnDef="livroID">
-        <th mat-header-cell *matHeaderCellDef> ID Livro </th>
-        <td mat-cell *matCellDef="let element"> {{element.livroID}} </td>
+      <ng-container matColumnDef="livroNome">
+        <th mat-header-cell *matHeaderCellDef> Titulo do Livro </th>
+        <td mat-cell *matCellDef="let element"> {{element.livroNome}} </td>
       </ng-container>
 
       <!-- Nome da pessoa que pegou emprestado -->
-      <ng-container matColumnDef="nomePessoa">
+      <ng-container matColumnDef="pessoaNome">
         <th mat-header-cell *matHeaderCellDef> Nome Pessoa </th>
-        <td mat-cell *matCellDef="let element"> {{element.nomePessoa}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.pessoaNome}} </td>
       </ng-container>
 
       <!-- Data do emprestimo -->

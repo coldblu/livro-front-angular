@@ -7,8 +7,10 @@
   <div class="formEmprestimo">
     <h1>Formulário para Emprestimo</h1>
     <mat-form-field>
-      <mat-label>Nome da pessoa:</mat-label>
-      <input matInput formControlName="pessoaID">
+      <mat-label>Pessoa:</mat-label>
+      <mat-select formControlName="pessoaID">
+        <mat-option *ngFor="let pessoa of pessoas" [value]="pessoa.idPessoa">{{ pessoa.nomePessoa+"("+pessoa.emailPessoa+")" }}</mat-option>
+      </mat-select>
     </mat-form-field>
 
     <button mat-raised-button color="primary" type="submit">Emprestar</button>

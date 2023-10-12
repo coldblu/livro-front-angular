@@ -16,7 +16,7 @@ import {SecurityService} from "../../../arquitetura/security/security.service";
   styleUrls: ['./list-emprestimo-profile.component.scss']
 })
 export class ListEmprestimoProfileComponent implements OnInit{
-
+  id_pessoa!: number;
   colunasMostrar = ['idEmprestimo','livroID', 'dataEmprestimo','acao'];
   emprestimoDataSource: MatTableDataSource<EmprestimoDto> = new MatTableDataSource<EmprestimoDto>();
 
@@ -33,7 +33,8 @@ export class ListEmprestimoProfileComponent implements OnInit{
   }
 
   private buscarDados() {
-    this.emprestimoService.listarEmprestimosAtivosDaPessoa(this.securityService.getPessoaId()).subscribe(data => {
+    this.id_pessoa = <number>this.securityService.getPessoaId();
+    this.emprestimoService.listarEmprestimosAtivosDaPessoa({id: this.id_pessoa}).subscribe(data => {
       this.emprestimoDataSource.data = data;
       console.log(data);
     })

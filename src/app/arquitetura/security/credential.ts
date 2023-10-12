@@ -59,7 +59,7 @@ export class Credential {
    * @returns userName
    */
   public get userName(): string {
-    return this._user ? this._user.nome : '';
+    return this._user ? this._user.pessoaNome : '';
   }
 
   /**

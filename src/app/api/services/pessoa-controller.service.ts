@@ -80,6 +80,60 @@ export class PessoaControllerService extends BaseService {
   }
 
   /**
+   * Path part for operation listarTodasPessoas
+   */
+  static readonly ListarTodasPessoasPath = '/api/v1/pessoa/listarPessoas';
+
+  /**
+   * Lista todo mundo do mundo.
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `listarTodasPessoas()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  listarTodasPessoas$Response(params?: {
+  },
+  context?: HttpContext
+
+): Observable<StrictHttpResponse<any>> {
+
+    const rb = new RequestBuilder(this.rootUrl, PessoaControllerService.ListarTodasPessoasPath, 'get');
+    if (params) {
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json',
+      context: context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<any>;
+      })
+    );
+  }
+
+  /**
+   * Lista todo mundo do mundo.
+   *
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `listarTodasPessoas$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  listarTodasPessoas(params?: {
+  },
+  context?: HttpContext
+
+): Observable<any> {
+
+    return this.listarTodasPessoas$Response(params,context).pipe(
+      map((r: StrictHttpResponse<any>) => r.body as any)
+    );
+  }
+
+  /**
    * Path part for operation buscarPessoa
    */
   static readonly BuscarPessoaPath = '/api/v1/pessoa/buscar_pessoa/{id}';
