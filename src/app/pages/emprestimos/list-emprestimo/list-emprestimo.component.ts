@@ -8,6 +8,7 @@ import {
   ConfirmationDialog,
   ConfirmationDialogResult
 } from "../../../core/confirmation-dialog/confirmation-dialog.component";
+import {SecurityService} from "../../../arquitetura/security/security.service";
 
 @Component({
   selector: 'app-list-emprestimo',
@@ -21,6 +22,7 @@ export class ListEmprestimoComponent implements OnInit{
   constructor(
     public emprestimoService: EmprestimoControllerService,
     private dialog: MatDialog,
+    public securityService: SecurityService,
     private snackBar: MatSnackBar
     ){
   }

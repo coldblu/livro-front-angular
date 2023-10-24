@@ -29,7 +29,7 @@
       <ng-container matColumnDef="acao">
         <th mat-header-cell class="coluna" *matHeaderCellDef> Ação </th>
         <td mat-cell *matCellDef="let element">
-          <button mat-icon-button (click)="confirmarFinalizar(element)">
+          <button mat-icon-button (click)="confirmarFinalizar(element)" *ngIf="securityService.hasRoles('ROLE_ADMIN')">
             <mat-icon>keyboard_return</mat-icon>
           </button>
         </td>

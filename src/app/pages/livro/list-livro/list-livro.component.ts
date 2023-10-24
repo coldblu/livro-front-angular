@@ -25,7 +25,7 @@ export class ListLivroComponent implements OnInit {
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
     private router: Router,
-    private securityService: SecurityService
+    public securityService: SecurityService
     ){
   }
 

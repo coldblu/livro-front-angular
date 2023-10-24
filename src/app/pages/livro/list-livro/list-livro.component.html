@@ -35,10 +35,10 @@
     <ng-container matColumnDef="acao">
       <th mat-header-cell class="coluna" *matHeaderCellDef> Ação </th>
       <td mat-cell *matCellDef="let element">
-        <button mat-icon-button (click)="confirmarExcluir(element)">
+        <button mat-icon-button (click)="confirmarExcluir(element)" *ngIf="securityService.hasRoles('ROLE_ADMIN')">
           <mat-icon>delete</mat-icon>
         </button>
-        <button mat-icon-button [routerLink]="['/livros',element.idLivro]">
+        <button mat-icon-button [routerLink]="['/livros',element.idLivro]" *ngIf="securityService.hasRoles('ROLE_ADMIN')">
           <mat-icon>edit</mat-icon>
         </button>
         <button mat-icon-button (click)="emprestarLivro(element)" [disabled]="element.emprestado">

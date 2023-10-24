@@ -22,6 +22,8 @@ export const livroRoutes: Routes = [
         path: ":id",
         component: FormLivroComponent
       }
-    ]
+    ],
+    canActivate: [SecurityGuard],
+    data: {security: {roles: ['ROLE_USER', 'ROLE_ADMIN']}}
   }
 ];

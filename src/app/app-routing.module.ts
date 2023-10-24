@@ -20,7 +20,9 @@ const routes: Routes = [
       ...livroRoutes,
       ...emprestimoRoutes,
         ...profileRoutes
-    ]
+    ],
+    canActivate: [SecurityGuard],
+    data: {security: {roles: ['ROLE_USER', 'ROLE_ADMIN']}}
 
   },
   {
